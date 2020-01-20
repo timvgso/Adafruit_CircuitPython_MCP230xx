@@ -1,3 +1,28 @@
+Work in Progress for MCP23Sxx SPI Devices
+============
+MCP23S08 is complete as far as matching the library features of the MCP23008. It uses
+the same digital_inout.py module for pin objects as the MCP23008, but otherwise is
+an independent implementation, meaning that users only need to have the file for
+the device they're using in their /lib folder.
+
+One difference between the MCP23S08 and the MCP23008 device objects is an extra
+optional command parameter that was added to the `__init__` member function: `NO_MISO`,
+which defaults to `False`. When this option is set to `True`, pins can be set as
+outputs but cannot be read as inputs. This is meant for a device such as the Gemma M0
+which doesn't expose enough pins for a full SPI interface, or for cases where a user
+doesn't need to read from device inputs and wants to save a pin. 
+
+The demo in examples/mcp23s08_blinkandbutton.py shows how to allocate pins, create
+a device object, then control two outputs and read an input. It gives details for
+pin connections for the two CircuitPython devices I used most of the time in testing,
+a Circuit Playground Express and a Hallowing M0.
+ 
+The files mcp23s17.py and mcp23s17_test.py represent my work so far on the MCP23S17
+devie. I have been able to read and write pins with it but got stuck trying to add
+interrupt support to match what's provided for the MCP23017. To be honest, I'm not
+sure exactly how far along the code in those files is, but it's most definitely a work
+in progress.
+
 Introduction
 ============
 
